@@ -219,17 +219,18 @@
   const deptLabel = { nursing:'Nursing', emergency:'Emergency Medicine', midwifery:'Midwifery' };
 
   // ===== AUTH =====
-  function doLogin() {
-    const u = document.getElementById('loginUser').value.trim();
-    const p = document.getElementById('loginPass').value;
-    if (HHI.login(u, p)) {
-      document.getElementById('loginOverlay').style.display = 'none';
-      document.getElementById('adminApp').style.display = 'grid';
-      renderThesesTable();
-    } else {
-      document.getElementById('loginError').style.display = 'block';
-    }
+ async function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const success = await HHI.login(u, p);
+  if (success) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'grid';
+    renderThesesTable();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
   }
+}
   function doLogout() { HHI.logout(); location.reload(); }
 
   // Check if already logged in
