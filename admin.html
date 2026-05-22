@@ -169,10 +169,11 @@ initLang();
 function getDL(){ return LANG==='ar'?{nursing:'التمريض',emergency:'الطوارئ',midwifery:'القبالة'}:{nursing:'Nursing',emergency:'Emergency Medicine',midwifery:'Midwifery'}; }
 const catLabels = {ar:{Academic:'الأكاديمية',Events:'الفعاليات',Facilities:'المرافق',Partnerships:'الشراكات',Training:'التدريب',General:'عام'},en:{Academic:'Academic',Events:'Events',Facilities:'Facilities',Partnerships:'Partnerships',Training:'Training',General:'General'}};
 
-function doLogin(){
+async function doLogin(){
   const u=document.getElementById('loginUser').value.trim();
   const p=document.getElementById('loginPass').value;
-  if(HHI.login(u,p)){
+  const success = await HHI.login(u,p);
+  if(success){
     document.getElementById('loginOverlay').style.display='none';
     document.getElementById('adminApp').style.display='grid';
     renderThesesTable();
